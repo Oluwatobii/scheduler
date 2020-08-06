@@ -30,7 +30,7 @@ export default function Application(props) {
         appointments: all[1].data,
       }));
     });
-  }, []); //Note: Passing an empty array as a dependancy is neccesary in order to avoid an infinite loop of the request beign made since there are no real dependancy
+  }, []); //Note: Passing an empty array as a dependancy is neccesary in order to avoid an infinite loop of the request being made since we have no real dependancy
 
   const renderAppointments = getAppointmentsForDay(state, state.day).map(
     (appointment) => {
