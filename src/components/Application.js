@@ -29,7 +29,6 @@ export default function Application(props) {
       Promise.resolve(axios.get("/api/appointments")),
       Promise.resolve(axios.get("/api/interviewers")),
     ]).then((all) => {
-      //console.log("THIS IS THE ALL==>", all);
       setState((prev) => ({
         ...prev,
         days: all[0].data,
@@ -41,21 +40,6 @@ export default function Application(props) {
 
   //Creating a fuunction for making a new interview
   const bookInterview = (id, interview) => {
-    //console.log("THIS IS THE BOOKINTERVIEW", id, interview);
-    //Appointment object
-    // const appointment = {
-    //   ...state.appointments[id],
-    //   interview: { ...interview },
-    // };
-    // console.log("This is the appointment objects", appointment);
-
-    // Adding the aformentioned appointment to the Appointments objects
-    // const appointments = {
-    //   ...state.appointments,
-    //   [id]: appointment,
-    // };
-    // console.log("This is the appointments objects", appointments);
-
     return axios.put(`/api/appointments/${id}`, { interview }).then((res) => {
       setState((prev) => ({
         ...prev,

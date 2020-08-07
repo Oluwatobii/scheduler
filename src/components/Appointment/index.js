@@ -15,16 +15,16 @@ const EMPTY = "EMPTY";
 const SHOW = "SHOW";
 const CREATE = "CREATE";
 const SAVING = "SAVING";
-const ERROR = "ERROR";
-const DELETE = "DELETE";
+const DELETING = "DELETING";
 const CONFIRM = "CONFIRM";
 const EDIT = "EDIT";
+const ERROR_SAVE = "ERROR_SAVE";
+const ERROR_DELETE = "ERROR_DELETE";
 
 export default function Appointment(props) {
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
   );
-  //console.log("THIS IS THE MODE BEING PASSED", mode);
 
   //Function to save apppoiintments
   const save = (name, interviewer) => {
@@ -38,17 +38,17 @@ export default function Appointment(props) {
       //transition(SHOW);
       .then((response) => transition(SHOW))
       .catch((error) => {
-        transition(ERROR);
+        transition(ERROR_SAVE, true);
       });
   };
 
   //Function to delete appointments
   const deleteAppointment = () => {
-    transition(DELETE);
+    transition(DELETING, true);
     props
       .cancelInterview(props.id)
       .then(() => transition(EMPTY))
-      .catch((err) => transition(ERROR));
+      .catch((err) => transition(ERROR_DELETE, true));
   };
 
   return (
@@ -78,7 +78,7 @@ export default function Appointment(props) {
         <Form onSave={save} onCancel={back} interviewers={props.interviewers} />
       )}
       {mode === SAVING && <Status message={"Saving"} />}
-      {mode === DELETE && <Status message={"Deleting"} />}
+      {mode === DELETING && <Status message={"Deleting"} />}
       {mode === CONFIRM && (
         <Confirm
           onConfirm={deleteAppointment}
@@ -94,6 +94,15 @@ export default function Appointment(props) {
           value={props.interview.interviewer.id}
           student={props.interview.student}
           interviewers={props.interviewers}
+        />
+      )}
+      {mode === ERROR_SAVE && (
+        <Error message="Please try again" onClose={back} />
+      )}
+      {mode === ERROR_DELETE && (
+        <Error
+          message="There was an error deleting your appointment. Please try again"
+          onClose={back}
         />
       )}
     </article>

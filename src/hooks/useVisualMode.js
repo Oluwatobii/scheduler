@@ -18,7 +18,6 @@ export default function useVisualMode(initial) {
 
   //A function to go back to the previous mode if the history is not in it's initial state
   function back() {
-    console.log("BACK!!!");
     if (history.length > 1) {
       const newHistory = [...history];
       newHistory.pop();
