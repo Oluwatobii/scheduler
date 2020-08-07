@@ -39,6 +39,37 @@ export default function Application(props) {
     });
   }, []); //Note: Passing an empty array as a dependancy is neccesary in order to avoid an infinite loop of the request being made since we have no real dependancy
 
+  //Creating a fuunction for making a new interview
+  function bookInterview(id, interview) {
+    //console.log("THIS IS THE BOOKINTERVIEW", id, interview);
+    //Appointment object
+    // const appointment = {
+    //   ...state.appointments[id],
+    //   interview: { ...interview },
+    // };
+    // console.log("This is the appointment objects", appointment);
+
+    // Adding the aformentioned appointment to the Appointments objects
+    // const appointments = {
+    //   ...state.appointments,
+    //   [id]: appointment,
+    // };
+    // console.log("This is the appointments objects", appointments);
+
+    return axios.put(`/api/appointments/${id}`, { interview }).then((res) => {
+      setState((prev) => ({
+        ...prev,
+        appointments: {
+          ...prev.appointments,
+          [id]: {
+            ...prev.appointments[id],
+            interview: { ...interview },
+          },
+        },
+      }));
+    });
+  }
+
   const renderAppointments = getAppointmentsForDay(state, state.day).map(
     (appointment) => {
       const interview = getInterview(state, appointment.interview);
@@ -50,6 +81,7 @@ export default function Application(props) {
           {...appointment}
           interview={interview}
           interviewers={interviewersForDay}
+          bookInterview={bookInterview}
         />
       );
     }
@@ -74,7 +106,7 @@ export default function Application(props) {
         />
       </section>
       <section className="schedule">
-        {renderAppointments} <Appointment key="final" time={"12am"} />
+        {renderAppointments} <Appointment key="final" time={"5pm"} />
       </section>
     </main>
   );

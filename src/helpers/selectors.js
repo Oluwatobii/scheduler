@@ -17,7 +17,7 @@ export const getAppointmentsForDay = function (state, day) {
 export const getInterview = (state, interview) => {
   if (interview) {
     const { interviewers } = state;
-
+    console.log(interviewers, interview);
     return {
       student: interview.student,
       interviewer: interviewers[interview.interviewer],
