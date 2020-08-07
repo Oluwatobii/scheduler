@@ -40,7 +40,7 @@ export default function Application(props) {
   }, []); //Note: Passing an empty array as a dependancy is neccesary in order to avoid an infinite loop of the request being made since we have no real dependancy
 
   //Creating a fuunction for making a new interview
-  function bookInterview(id, interview) {
+  const bookInterview = (id, interview) => {
     //console.log("THIS IS THE BOOKINTERVIEW", id, interview);
     //Appointment object
     // const appointment = {
@@ -68,7 +68,11 @@ export default function Application(props) {
         },
       }));
     });
-  }
+  };
+
+  const cancelInterview = (id, interview = null) => {
+    return axios.delete(`/api/appointments/${id}`, { interview });
+  };
 
   const renderAppointments = getAppointmentsForDay(state, state.day).map(
     (appointment) => {
@@ -82,6 +86,7 @@ export default function Application(props) {
           interview={interview}
           interviewers={interviewersForDay}
           bookInterview={bookInterview}
+          cancelInterview={cancelInterview}
         />
       );
     }
