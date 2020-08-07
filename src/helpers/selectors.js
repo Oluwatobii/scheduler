@@ -26,3 +26,19 @@ export const getInterview = (state, interview) => {
     return null;
   }
 };
+
+export const getInterviewersForDay = function (state, day) {
+  const matchingDays = state.days.filter((element) => {
+    return element.name === day;
+  });
+
+  if (matchingDays.length === 0) {
+    return [];
+  }
+
+  const renderInterviewList = matchingDays[0].interviewers.map((element) => {
+    return state.interviewers[element];
+  });
+
+  return renderInterviewList;
+};
