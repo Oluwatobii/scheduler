@@ -101,7 +101,7 @@ export default function Appointment(props) {
         <Form
           onSave={save}
           onCancel={back}
-          value={props.interview.interviewer.id}
+          interviewer={props.interview.interviewer.id}
           student={props.interview.student}
           interviewers={props.interviewers}
         />
