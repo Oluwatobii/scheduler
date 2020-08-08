@@ -29,8 +29,16 @@ export default function useApplicationData() {
   }, []); //Note: Passing an empty array as a dependancy is neccesary in order to avoid an infinite loop of the request being made since we have no real dependancy
 
   //Creating a fuunction for making a new interview
-  const bookInterview = (id, interview) => {
+  const bookInterview = (id, interview, spotChange) => {
+    let newDays = [...state.days];
     return axios.put(`/api/appointments/${id}`, { interview }).then((res) => {
+      if (spotChange) {
+        const today = state.days.find((day) => day.appointments.includes(id));
+        const dayToChangeSpotsFor = newDays.find(
+          (newDay) => newDay.id === today.id
+        );
+        dayToChangeSpotsFor.spots = dayToChangeSpotsFor.spots - 1;
+      }
       setState((prev) => ({
         ...prev,
         appointments: {
@@ -40,13 +48,31 @@ export default function useApplicationData() {
             interview: { ...interview },
           },
         },
+        days: newDays,
       }));
     });
   };
 
   // Function to cancel an interview
   const cancelInterview = (id, interview = null) => {
-    return axios.delete(`/api/appointments/${id}`, { interview });
+    return axios
+      .delete(`/api/appointments/${id}`, { interview })
+      .then((response) => {
+        const today = state.days.find((day) => day.appointments.includes(id));
+        const newDays = [...state.days];
+
+        // get the number of spots for that day using day.spots
+        // increment
+        const dayToChangeSpotsFor = newDays.find(
+          (newDay) => newDay.id === today.id
+        );
+        dayToChangeSpotsFor.spots = dayToChangeSpotsFor.spots + 1;
+
+        setState((prev) => ({
+          ...prev,
+          days: newDays,
+        }));
+      });
   };
 
   return { state, setDay, bookInterview, cancelInterview };
