@@ -5,6 +5,7 @@ export default function useApplicationData() {
   const SET_DAY = "SET_DAY";
   const SET_APPLICATION_DATA = "SET_APPLICATION_DATA";
   const SET_INTERVIEW = "SET_INTERVIEW";
+  // const SET_SPOT = "SET_SPOT";
 
   const reducer = (state, action) => {
     switch (action.type) {
@@ -17,6 +18,9 @@ export default function useApplicationData() {
       case SET_INTERVIEW: {
         return { ...state, ...action.value };
       }
+      // case SET_SPOT: {
+      //   return { ...state, ...action.value };
+      // }
       default:
         throw new Error(
           `Tried to reduce with unsupported action type: ${action.type}`
@@ -62,6 +66,15 @@ export default function useApplicationData() {
         );
         dayToChangeSpotsFor.spots = dayToChangeSpotsFor.spots - 1;
       }
+
+      // dispatch({
+      //   value: {
+      //     ...state,
+      //     days: newDays,
+      //   },
+      //   type: SET_SPOT,
+      // });
+
       dispatch({
         value: {
           ...state,
@@ -74,7 +87,7 @@ export default function useApplicationData() {
           },
           days: newDays,
         },
-        type: SET_APPLICATION_DATA,
+        type: SET_INTERVIEW,
       });
     });
   };
@@ -94,12 +107,20 @@ export default function useApplicationData() {
         );
         dayToChangeSpotsFor.spots = dayToChangeSpotsFor.spots + 1;
 
+        // dispatch({
+        //   value: {
+        //     ...state,
+        //     days: newDays,
+        //   },
+        //   type: SET_SPOT,
+        // });
+
         dispatch({
           value: {
             ...state,
             days: newDays,
           },
-          type: SET_APPLICATION_DATA,
+          type: SET_INTERVIEW,
         });
       });
   };
