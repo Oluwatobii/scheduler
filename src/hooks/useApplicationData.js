@@ -16,7 +16,17 @@ export default function useApplicationData() {
         return { ...state, ...action.value };
       }
       case SET_INTERVIEW: {
-        return { ...state, ...action.value };
+        return {
+          ...state,
+          appointments: {
+            ...state.appointments,
+            [action.id]: {
+              ...state.appointments[action.id],
+              interview: { ...action.interview },
+            },
+          },
+          days: [...state.days],
+        };
       }
       // case SET_SPOT: {
       //   return { ...state, ...action.value };
@@ -33,7 +43,6 @@ export default function useApplicationData() {
     days: [],
     appointments: {},
   });
-
   // State for the day and days
   const setDay = (day) => dispatch({ type: SET_DAY, value: day });
 
@@ -55,47 +64,66 @@ export default function useApplicationData() {
     });
   }, []); //Note: Passing an empty array as a dependancy is neccesary in order to avoid an infinite loop of the request being made since we have no real dependancy
 
+  //Connecting to a websocket server
+  useEffect(() => {
+    const webSocket = new WebSocket("ws://localhost:8001/");
+
+    //Sending data to the server
+    webSocket.onopen = (event) => {
+      //webSocket.send(JSON.stringify("ping"));
+      webSocket.send("ping");
+    };
+
+    //Receiving messages from the server
+    webSocket.onmessage = (event) => {
+      const response = JSON.parse(event.data);
+      console.log("Message Received:", response);
+
+      if (response.type === SET_INTERVIEW) {
+        dispatch({
+          type: SET_INTERVIEW,
+          id: response.id,
+          interview: response.interview,
+          //days: response.days,
+        });
+      }
+    };
+  }, []);
+
   //Creating a fuunction for making a new interview
   const bookInterview = (id, interview, spotChange) => {
     let newDays = [...state.days];
-    return axios.put(`/api/appointments/${id}`, { interview }).then((res) => {
-      if (spotChange) {
-        const today = state.days.find((day) => day.appointments.includes(id));
-        const dayToChangeSpotsFor = newDays.find(
-          (newDay) => newDay.id === today.id
-        );
-        dayToChangeSpotsFor.spots = dayToChangeSpotsFor.spots - 1;
-      }
+    return axios
+      .put(`http://localhost:8001/api/appointments/${id}`, { interview })
+      .then((res) => {
+        if (spotChange) {
+          const today = state.days.find((day) => day.appointments.includes(id));
+          const dayToChangeSpotsFor = newDays.find(
+            (newDay) => newDay.id === today.id
+          );
+          dayToChangeSpotsFor.spots = dayToChangeSpotsFor.spots - 1;
+        }
 
-      // dispatch({
-      //   value: {
-      //     ...state,
-      //     days: newDays,
-      //   },
-      //   type: SET_SPOT,
-      // });
+        // dispatch({
+        //   value: {
+        //     ...state,
+        //     days: newDays,
+        //   },
+        //   type: SET_SPOT,
+        // });
 
-      dispatch({
-        value: {
-          ...state,
-          appointments: {
-            ...state.appointments,
-            [id]: {
-              ...state.appointments[id],
-              interview: { ...interview },
-            },
-          },
-          days: newDays,
-        },
-        type: SET_INTERVIEW,
+        dispatch({
+          type: SET_INTERVIEW,
+          id: id,
+          interview: interview,
+        });
       });
-    });
   };
 
   // Function to cancel an interview
   const cancelInterview = (id, interview = null) => {
     return axios
-      .delete(`/api/appointments/${id}`, { interview })
+      .delete(`http://localhost:8001/api/appointments/${id}`, { interview })
       .then((response) => {
         const today = state.days.find((day) => day.appointments.includes(id));
         const newDays = [...state.days];
@@ -116,11 +144,9 @@ export default function useApplicationData() {
         // });
 
         dispatch({
-          value: {
-            ...state,
-            days: newDays,
-          },
           type: SET_INTERVIEW,
+          id: id,
+          interview: interview,
         });
       });
   };

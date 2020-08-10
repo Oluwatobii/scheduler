@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import useVisualMode from "hooks/useVisualMode";
 
 import "components/Appointment/styles.scss";
@@ -26,6 +26,15 @@ export default function Appointment(props) {
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
   );
+
+  useEffect(() => {
+    if (mode === EMPTY && props.interview && props.interview.interviewer) {
+      transition(SHOW);
+    }
+    if (mode === SHOW && (!props.interview || !props.interview.interviewer)) {
+      transition(EMPTY);
+    }
+  }, [props.interview, transition, mode]);
 
   //Function to save apppoiintments
   const save = (name, interviewer, spotChange) => {
@@ -67,7 +76,7 @@ export default function Appointment(props) {
           }}
         />
       )}
-      {mode === SHOW && (
+      {mode === SHOW && props.interview && props.interview.interviewer && (
         <Show
           student={props.interview.student}
           interviewer={props.interview.interviewer.name}
