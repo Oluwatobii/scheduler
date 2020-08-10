@@ -65,6 +65,13 @@ export default function Appointment(props) {
       .catch((err) => transition(ERROR_DELETE, true));
   };
 
+  // const defaultStudentName = props.interview
+  //   ? props.interview.student
+  //     ? props.interview.student
+  //     : ""
+  //   : "";
+  // const [studentName, setStudentName] = useState(defaultStudentName);
+
   return (
     <article className="appointment">
       <Header time={props.time} />
@@ -93,6 +100,8 @@ export default function Appointment(props) {
           onSave={save}
           onCancel={back}
           interviewers={props.interviewers}
+          // studentName={studentName}
+          // setStudentName={setStudentName}
           spotChange={true}
         />
       )}
@@ -113,6 +122,8 @@ export default function Appointment(props) {
           interviewer={props.interview.interviewer.id}
           student={props.interview.student}
           interviewers={props.interviewers}
+          // studentName={studentName}
+          // setStudentName={setStudentName}
         />
       )}
       {mode === ERROR_SAVE && (

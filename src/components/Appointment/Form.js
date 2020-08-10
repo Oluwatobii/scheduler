@@ -5,11 +5,13 @@ import Button from "components/Button";
 export default function Form(props) {
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
   const [studentName, setStudentName] = useState(props.student || "");
+  //const { studentName, setStudentName } = props;
   const [error, setError] = useState("");
 
   const reset = () => {
     setInterviewer(null);
     setStudentName("");
+    setError("");
   };
 
   const cancel = () => {
@@ -23,6 +25,7 @@ export default function Form(props) {
       return;
     }
 
+    setError("");
     props.onSave(studentName, interviewer, props.spotChange);
   }
 
@@ -45,6 +48,7 @@ export default function Form(props) {
           interviewers={props.interviewers}
           interviewer={interviewer}
           setInterviewer={setInterviewer}
+          //value={1}
         />
       </section>
       <section className="appointment__card-right">
