@@ -27,6 +27,16 @@ export default {
       });
     }
   }),
+  put: jest.fn((url) => {
+    //Mocking axios.put
+    if (url.startsWith("/api/appointments/")) {
+      return Promise.resolve({
+        status: 204,
+        statusText: "No Content",
+      });
+    }
+    //console.log("appts", fixtures.appointments["1"]);
+  }),
 };
 
 const fixtures = {

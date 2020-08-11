@@ -73,7 +73,7 @@ export default function Appointment(props) {
   // const [studentName, setStudentName] = useState(defaultStudentName);
 
   return (
-    <article className="appointment">
+    <article className="appointment" data-testid="appointment">
       <Header time={props.time} />
 
       {mode === EMPTY && (

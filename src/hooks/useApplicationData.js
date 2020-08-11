@@ -91,33 +91,31 @@ export default function useApplicationData() {
 
   //Creating a fuunction for making a new interview
   const bookInterview = (id, interview, spotChange) => {
-    return axios
-      .put(`http://localhost:8001/api/appointments/${id}`, { interview })
-      .then((res) => {
-        let newDays = [...state.days];
-        if (spotChange) {
-          const today = state.days.find((day) => day.appointments.includes(id));
-          newDays = state.days.map((day) => {
-            if (day.id === today.id) {
-              day.spots = day.spots - 1;
-            }
-            return day;
-          });
-        }
-
-        dispatch({
-          type: SET_INTERVIEW,
-          id: id,
-          interview: interview,
-          days: newDays,
+    return axios.put(`/api/appointments/${id}`, { interview }).then((res) => {
+      let newDays = [...state.days];
+      if (spotChange) {
+        const today = state.days.find((day) => day.appointments.includes(id));
+        newDays = state.days.map((day) => {
+          if (day.id === today.id) {
+            day.spots = day.spots - 1;
+          }
+          return day;
         });
+      }
+
+      dispatch({
+        type: SET_INTERVIEW,
+        id: id,
+        interview: interview,
+        days: newDays,
       });
+    });
   };
 
   // Function to cancel an interview
   const cancelInterview = (id, interview = null) => {
     return axios
-      .delete(`http://localhost:8001/api/appointments/${id}`, { interview })
+      .delete(`/api/appointments/${id}`, { interview })
       .then((response) => {
         const today = state.days.find((day) => day.appointments.includes(id));
         //const newDays = [...state.days];
