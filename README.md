@@ -2,11 +2,14 @@
 
 The interview scheduler is an app created using using the latest tools and techniques, to build and test a React application that allows users to book and cancel interviews. An interview can be booked on a selected day of the week (Monday through Friday), for a selected time slot, and with a selected interviewer. We combine a concise API with a WebSocket server to build a realtime experience.
 
-## Setup
+## Getting Started
 
 - Install dependencies with `npm install`.
 - Fork and Clone the scheduler-api from <https://github.com/lighthouse-labs/scheduler-api> and then run the development server from the scheduler-api root folder using `npm start`
 - On a separate terminal, run development build using `npm start` from project root folder
+
+## Alternatively (Stretch)
+
 - Production deployment using Netlify: <https://5f346443797786570b774b25--upbeat-hawking-a45e1b.netlify.app/>
 - Deploying Server for the database using Heroku: <https://lhlscheduler.herokuapp.com/api/days/>
 
