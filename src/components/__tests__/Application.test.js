@@ -13,6 +13,7 @@ import {
   waitForElementToBeRemoved,
   queryByText,
   queryByAltText,
+  prettyDOM,
 } from "@testing-library/react";
 
 import Application from "components/Application";
@@ -67,6 +68,8 @@ describe("Application", () => {
     // 7. Check that the element with the text "Saving" is displayed.
     expect(getByText(appointment, "Saving")).toBeInTheDocument();
 
+    //console.log(prettyDOM(appointment));
+
     // 8. Wait until the element with the text "Lydia Miller-Jones" is displayed.
     await waitForElementToBeRemoved(() => getByText(appointment, "Saving"));
     await waitForElement(() => getByText(appointment, "Lydia Miller-Jones"));
@@ -78,6 +81,7 @@ describe("Application", () => {
     );
 
     expect(getByText(day, "no spots remaining")).toBeInTheDocument();
+    console.log(prettyDOM(container));
   });
 
   it("loads data, cancels an interview and increases the spots remaining for Monday by 1", async () => {
