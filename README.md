@@ -5,7 +5,7 @@ The interview scheduler is an app created using using the latest tools and techn
 ## Getting Started
 
 - Install dependencies with `npm install`.
-- Fork and Clone the scheduler-api from <https://github.com/lighthouse-labs/scheduler-api> and then run the development server from the scheduler-api root folder using `npm start`
+- Fork and Clone the scheduler-api from <https://github.com/Oluwatobii/scheduler-api> and then run the development server from the scheduler-api root folder using `npm start`
 - On a separate terminal, run development build using `npm start` from project root folder
 
 ## Alternatively (Stretch)
