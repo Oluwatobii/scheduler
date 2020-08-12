@@ -15,10 +15,12 @@ export default function useVisualMode(initial) {
     }
     setMode(newMode);
   }
-  //Initial state = Empty
-  //Click on add button, then state becoems Create form
-  //on Error, we replace create form with error state
-  //on close error, the previous state = empty state
+  /*
+  Initial state = Empty
+  Click on add button, then state becoems Create form
+  on Error, we replace create form with error state
+  on close error, the previous state = empty state
+  */
 
   //A function to go back to the previous mode if the history is not in it's initial state
   function back() {

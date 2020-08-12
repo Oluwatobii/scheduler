@@ -21,19 +21,6 @@ import Application from "components/Application";
 afterEach(cleanup);
 
 describe("Application", () => {
-  // xit("render", () => {
-  //   render(<Application />);
-  // });
-
-  // xit("defaults to Monday and changes the schedule when a new day is selected", () => {
-  //   const { getByText } = render(<Application />);
-
-  //   return waitForElement(() => getByText("Monday")).then(() => {
-  //     fireEvent.click(getByText("Tuesday"));
-  //     expect(getByText("Leopold Silvers")).toBeInTheDocument();
-  //   });
-  // });
-
   it("defaults to Monday and changes the schedule when a new day is selected", async () => {
     const { getByText } = render(<Application />);
 
@@ -216,7 +203,6 @@ describe("Application", () => {
     expect(getByText(appointment, "Deleting")).toBeInTheDocument();
 
     // 8. Check that the element with the text "There was an error deleting your appointment. Please try again" is displayed.
-
     await waitForElement(() =>
       getByText(
         appointment,

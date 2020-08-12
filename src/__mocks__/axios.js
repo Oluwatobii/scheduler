@@ -38,7 +38,6 @@ export default {
   }),
   delete: jest.fn((url) => {
     //Mocking axios.delete
-    //return Promise.reject();
     if (url.startsWith("/api/appointments/")) {
       return Promise.resolve({
         status: 204,

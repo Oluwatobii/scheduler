@@ -1,6 +1,4 @@
 import React from "react";
-//import "components/Appointment/styles.scss";
-//import classNames from "classnames/bind";
 
 export default function Show(props) {
   return (
