@@ -119,6 +119,7 @@ export default function useApplicationData() {
       .then((response) => {
         const today = state.days.find((day) => day.appointments.includes(id));
         //const newDays = [...state.days];
+
         const newDays = state.days.map((day) => {
           if (day.id === today.id) {
             day.spots = day.spots + 1;

@@ -5,7 +5,7 @@ export default {
       return Promise.resolve({
         status: 200,
         statusText: "OK",
-        data: fixtures.days,
+        data: JSON.parse(JSON.stringify(fixtures.days)),
       });
     }
 
@@ -14,7 +14,7 @@ export default {
       return Promise.resolve({
         status: 200,
         statusText: "OK",
-        data: fixtures.appointments,
+        data: JSON.parse(JSON.stringify(fixtures.appointments)),
       });
     }
 
@@ -35,7 +35,16 @@ export default {
         statusText: "No Content",
       });
     }
-    //console.log("appts", fixtures.appointments["1"]);
+  }),
+  delete: jest.fn((url) => {
+    //Mocking axios.delete
+    //return Promise.reject();
+    if (url.startsWith("/api/appointments/")) {
+      return Promise.resolve({
+        status: 204,
+        statusText: "No Content",
+      });
+    }
   }),
 };
 
