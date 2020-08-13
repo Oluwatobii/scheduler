@@ -10,7 +10,12 @@ The interview scheduler is an app created using the latest tools and techniques,
 
 #### Alternatively (Stretch)
 
-- Production deployment using Netlify: <https://upbeat-hawking-a45e1b.netlify.app/> (Might take 30secs to render properly due to using the free plan from Heroku)
+- Production deployment using Netlify: <https://upbeat-hawking-a45e1b.netlify.app/> 
+> Due to the fact that we are using the free plan from Heroku. 
+> After thirty minutes of inactivity, our server instance will shutdown. 
+> thus, when we want to use it again, we  need to make a request,  
+> and it will take a few seconds to start up again. 
+> Once we have revived the server, it will behave as expected until it notices that it is inactive for thirty minutes.
 - Deploying Server for the database using Heroku: <https://lhlscheduler.herokuapp.com/api/days/>
 
 ## Running Jest Test Framework
