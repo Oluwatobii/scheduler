@@ -63,8 +63,6 @@ export default function useApplicationData() {
 
   //Connecting to a websocket server
   useEffect(() => {
-    //const webSocket = new WebSocket("ws://localhost:8001/");
-    console.log("BEFORE", process.env);
     let websocketURL = "ws://localhost:8001/";
     if (process.env.REACT_APP_WEBSOCKET_URL) {
       websocketURL = process.env.REACT_APP_WEBSOCKET_URL;
@@ -73,7 +71,6 @@ export default function useApplicationData() {
 
     //Sending data to the server
     webSocket.onopen = (event) => {
-      //webSocket.send(JSON.stringify("ping"));
       webSocket.send("ping");
     };
 
@@ -97,8 +94,6 @@ export default function useApplicationData() {
 
   //Creating a fuunction for making a new interview
   const bookInterview = (id, interview, spotChange) => {
-    console.log("HELLO");
-
     return axios.put(`/api/appointments/${id}`, { interview }).then((res) => {
       let newDays = [...state.days];
       if (spotChange) {
