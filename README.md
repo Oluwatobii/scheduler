@@ -1,6 +1,6 @@
 # Interview Scheduler
 
-The interview scheduler is an app created using using the latest tools and techniques, to build and test a React application that allows users to book and cancel interviews. An interview can be booked on a selected day of the week (Monday through Friday), for a selected time slot, and with a selected interviewer. We combine a concise API with a WebSocket server to build a realtime experience.
+The interview scheduler is an app created using the latest tools and techniques, to build and test a React application that allows users to book and cancel interviews. An interview can be booked on a selected day of the week (Monday through Friday), for a selected time slot (12pm through 5pm), and with a selected interviewer. We also combine a concise API with a WebSocket server to stimulate a realtime experience.
 
 ## Getting Started
 
@@ -8,7 +8,7 @@ The interview scheduler is an app created using using the latest tools and techn
 - Fork and Clone the scheduler-api from <https://github.com/Oluwatobii/scheduler-api> and then run the development server from the scheduler-api root folder using `npm start`
 - On a separate terminal, run development build using `npm start` from project root folder
 
-## Alternatively (Stretch)
+### Alternatively (Stretch)
 
 - Production deployment using Netlify: <https://upbeat-hawking-a45e1b.netlify.app/>
 - Deploying Server for the database using Heroku: <https://lhlscheduler.herokuapp.com/api/days/>
@@ -50,11 +50,11 @@ npm run storybook
 - No Appointments Made
   !["No Appointments Made"](public/images/empty.png)
 
-- Scheduler App
-  !["UI"](public/images/UI.png)
-
 - Creating an Appointment
   !["Creating an Appointment"](public/images/create.png)
+
+- Scheduler App
+  !["UI"](public/images/UI.png)
 
 - Deleting an Appointment
   !["Deleting an Appointment"](public/images/confirm.png)
