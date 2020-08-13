@@ -64,16 +64,11 @@ export default function useApplicationData() {
   //Connecting to a websocket server
   useEffect(() => {
     let websocketURL = "ws://localhost:8001/";
-    // let websocketURL = "wss://lhlscheduler.herokuapp.com/";
-    // if (process.env.NODE_ENV === "test") {
-    //   websocketURL = "ws://localhost:8001/";
-    // }
+
     if (process.env.REACT_APP_WEBSOCKET_URL) {
       websocketURL = process.env.REACT_APP_WEBSOCKET_URL;
     }
-    //console.log("===>", process.env.NODE_ENV);
     const webSocket = new WebSocket(websocketURL);
-    console.log("===>", websocketURL);
 
     //Sending data to the server
     webSocket.onopen = (event) => {
