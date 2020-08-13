@@ -10,7 +10,7 @@ The interview scheduler is an app created using the latest tools and techniques,
 
 #### Alternatively (Stretch)
 
-- Production deployment using Netlify: <https://upbeat-hawking-a45e1b.netlify.app/>
+- Production deployment using Netlify: <https://upbeat-hawking-a45e1b.netlify.app/> (Might take 30secs to render properly due to using the free plan from Heroku)
 - Deploying Server for the database using Heroku: <https://lhlscheduler.herokuapp.com/api/days/>
 
 ## Running Jest Test Framework
