@@ -78,7 +78,6 @@ export default function useApplicationData() {
     //Receiving messages from the server
     webSocket.onmessage = (event) => {
       const response = JSON.parse(event.data);
-      console.log("Message Received:", response);
 
       if (response.type === SET_INTERVIEW) {
         axios.get("/api/days").then((result) => {
