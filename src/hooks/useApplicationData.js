@@ -97,6 +97,8 @@ export default function useApplicationData() {
 
   //Creating a fuunction for making a new interview
   const bookInterview = (id, interview, spotChange) => {
+    console.log("HELLO");
+
     return axios.put(`/api/appointments/${id}`, { interview }).then((res) => {
       let newDays = [...state.days];
       if (spotChange) {
