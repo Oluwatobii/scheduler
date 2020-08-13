@@ -8,7 +8,7 @@ The interview scheduler is an app created using the latest tools and techniques,
 - Fork and Clone the scheduler-api from <https://github.com/Oluwatobii/scheduler-api> and then run the development server from the scheduler-api root folder using `npm start`
 - On a separate terminal, run development build using `npm start` from project root folder
 
-### Alternatively (Stretch)
+###### Alternatively (Stretch)
 
 - Production deployment using Netlify: <https://upbeat-hawking-a45e1b.netlify.app/>
 - Deploying Server for the database using Heroku: <https://lhlscheduler.herokuapp.com/api/days/>
